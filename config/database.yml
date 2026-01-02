@@ -4,21 +4,25 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+
+# config/database.yml
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # guides.rubyonrails.org
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  username: ai_api # The username you created in Step 2
+  password: "password" #<%= ENV['DATABASE_PASSWORD'] %> # Use an environment variable
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: ai_api_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: ai_api_test
+# ... (production environment details typically handled by deployment service)
 
 
 # Store production database in the storage/ directory, which by default
